@@ -10,7 +10,7 @@ app = FastAPI(title="AetherFlow AI API")
 # CORS allows your React frontend (running on a different port) to talk to this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, change "*" to your actual React app URL (e.g., "http://localhost:3000")
+    allow_origins=["https://aetherflow-ui.vercel.app"],  # In production, change "*" to your actual React app URL (e.g., "http://localhost:3000")
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
