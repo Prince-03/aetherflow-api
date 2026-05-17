@@ -4,13 +4,14 @@ from pydantic import BaseModel
 
 # This is where we bridge the API to your LangChain logic
 from main_agent import agent_executor
+from aetherflow_tools import get_all_inventory
 
 app = FastAPI(title="AetherFlow AI API")
 
 # CORS allows your React frontend (running on a different port) to talk to this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://aetherflow-ui.vercel.app"],  # In production, change "*" to your actual React app URL (e.g., "http://localhost:3000")
+    allow_origins=["*"],  # In production, change "*" to your actual React app URL (e.g., "http://localhost:3000")
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -18,6 +19,18 @@ app.add_middleware(
 
 class AnalysisRequest(BaseModel):
     sku: str
+
+@app.get("/api/inventory")
+async def fetch_inventory():
+    """
+    This endpoint sends the complete database of SKUs to the React frontend
+    so it can generate the clickable visual grid dynamically.
+    """
+    try:
+        items = get_all_inventory()
+        return {"status": "success", "data": items}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 @app.post("/api/analyze")
 async def analyze_sku(request: AnalysisRequest):
