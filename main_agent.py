@@ -21,7 +21,7 @@ from aetherflow_tools import (
 
 # 1. API KEY SETUP
 # Replace with your GitHub Personal Access Token (starts with ghp_ or github_pat_)
-os.environ["GITHUB_TOKEN"] = "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"
+os.environ["GITHUB_TOKEN"] = "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"
 
 # 2. INITIALIZE AI
 # Configure LangChain to use GitHub Models via the Azure inference endpoint
