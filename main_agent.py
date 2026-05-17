@@ -21,14 +21,13 @@ from aetherflow_tools import (
 
 # 1. API KEY SETUP
 # Replace with your GitHub Personal Access Token (starts with ghp_ or github_pat_)
-os.environ["GITHUB_TOKEN"] = "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"
-
+#api_key=os.environ.get("GITHUB_TOKEN")
 # 2. INITIALIZE AI
 # Configure LangChain to use GitHub Models via the Azure inference endpoint
 llm = ChatOpenAI(
     model="gpt-4o", 
     temperature=0,
-    api_key=os.environ["GITHUB_TOKEN"],
+    api_key=os.environ.get("GITHUB_TOKEN"),
     base_url="https://models.inference.ai.azure.com"
 )
 
